@@ -20,15 +20,17 @@ class _View extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Way 2 to print state data
-    final counterState = context.watch<CounterCubit>().state;
+    // // Way 2 to print state data
+    // final counterState = context.watch<CounterCubit>().state;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cubit Counter: ${counterState.transactionCount}'),
+        // 3rd way to consume state data
+        title: context.select((CounterCubit value) =>
+            Text('Cubit Counter: ${value.state.transactionCount}')),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => context.read<CounterCubit>().reset(),
             icon: const Icon(Icons.refresh_rounded),
           ),
         ],
@@ -36,7 +38,7 @@ class _View extends StatelessWidget {
       body: Center(
         // Way 1 to print state data
         child: BlocBuilder<CounterCubit, CounterState>(
-          buildWhen: (previous, current) => current.counter != previous.counter,
+          // buildWhen: (previous, current) => current.counter != previous.counter,
           builder: (context, state) {
             return Text('Counter Value ${state.counter}');
           },
@@ -48,17 +50,17 @@ class _View extends StatelessWidget {
         spacing: 15,
         children: [
           FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => context.read<CounterCubit>().increaseBy(3),
             heroTag: '1',
             child: const Text('+3'),
           ),
           FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => context.read<CounterCubit>().increaseBy(2),
             heroTag: '2',
             child: const Text('+2'),
           ),
           FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => context.read<CounterCubit>().increaseBy(1),
             heroTag: '3',
             child: const Text('+1'),
           ),
