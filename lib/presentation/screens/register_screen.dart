@@ -104,11 +104,7 @@ class _ViewState extends State<_View> {
                 ),
                 const SizedBox(height: 40),
                 FilledButton.icon(
-                  onPressed: () {
-                    final isValid = formKey.currentState!.validate();
-
-                    if (!isValid) return;
-                  },
+                  onPressed: () => registerCubit.onSubmit(),
                   icon: const Icon(Icons.save_rounded),
                   label: const Text('Crear Usuario'),
                 ),
