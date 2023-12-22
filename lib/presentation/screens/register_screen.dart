@@ -19,55 +19,40 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class _View extends StatefulWidget {
+class _View extends StatelessWidget {
   const _View();
-
-  @override
-  State<_View> createState() => _ViewState();
-}
-
-class _ViewState extends State<_View> {
-  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final registerCubit = context.watch<RegisterCubit>();
+
+    final username = registerCubit.state.username;
+    final password = registerCubit.state.password;
 
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Form(
-            key: formKey,
             child: Column(
               children: [
                 const FlutterLogo(),
+                // Username
                 TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Nombre de usuario',
+                    errorText: username.isPure || username.isValid
+                        ? null
+                        : 'Usuario no valido',
                   ),
-                  onChanged: (value) {
-                    registerCubit.usernameChanged(value);
-                    formKey.currentState?.validate();
-                  },
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().isEmpty) {
-                      return 'Campo requerido';
-                    }
-                    if (value.length < 6) return 'Mas de 6 letras';
-                    return null;
-                  },
+                  onChanged: registerCubit.usernameChanged,
                 ),
+                // Email
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'Correo electronico',
                   ),
-                  onChanged: (value) {
-                    registerCubit.usernameChanged(value);
-                    formKey.currentState?.validate();
-                  },
+                  onChanged: (value) => registerCubit.usernameChanged(value),
                   validator: (value) {
                     if (value == null ||
                         value.isEmpty ||
@@ -83,26 +68,19 @@ class _ViewState extends State<_View> {
                     return null;
                   },
                 ),
+                // Password
                 TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Constraseña',
+                    errorText: password.isPure || password.isValid
+                        ? null
+                        : 'Contraseña no valida',
                   ),
                   obscureText: true,
-                  onChanged: (value) {
-                    registerCubit.usernameChanged(value);
-                    formKey.currentState?.validate();
-                  },
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().isEmpty) {
-                      return 'Campo requerido';
-                    }
-                    if (value.length < 6) return 'Mas de 6 letras';
-                    return null;
-                  },
+                  onChanged: (value) => registerCubit.usernameChanged(value),
                 ),
                 const SizedBox(height: 40),
+                // Submit Button
                 FilledButton.icon(
                   onPressed: () => registerCubit.onSubmit(),
                   icon: const Icon(Icons.save_rounded),
