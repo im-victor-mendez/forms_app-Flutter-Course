@@ -20,4 +20,11 @@ class Username extends FormzInput<String, UsernameError> {
 
     return null;
   }
+
+  String? get errorMessage {
+    if (displayError == UsernameError.empty) return 'Usuario no valido';
+    if (displayError == UsernameError.length) return 'Minimo 6 caracteres';
+
+    return null;
+  }
 }

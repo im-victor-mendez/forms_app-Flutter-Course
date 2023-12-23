@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:forms_app/presentation/blocs/register_cubit/register_cubit.dart';
+
+import '../blocs/register_cubit/register_cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -41,9 +42,7 @@ class _View extends StatelessWidget {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Nombre de usuario',
-                    errorText: username.isPure || username.isValid
-                        ? null
-                        : 'Usuario no valido',
+                    errorText: username.errorMessage,
                   ),
                   onChanged: registerCubit.usernameChanged,
                 ),
@@ -72,12 +71,10 @@ class _View extends StatelessWidget {
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Constraseña',
-                    errorText: password.isPure || password.isValid
-                        ? null
-                        : 'Contraseña no valida',
+                    errorText: password.errorMessage,
                   ),
                   obscureText: true,
-                  onChanged: (value) => registerCubit.usernameChanged(value),
+                  onChanged: registerCubit.passwordChanged,
                 ),
                 const SizedBox(height: 40),
                 // Submit Button
