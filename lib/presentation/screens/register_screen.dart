@@ -29,6 +29,7 @@ class _View extends StatelessWidget {
 
     final username = registerCubit.state.username;
     final password = registerCubit.state.password;
+    final email = registerCubit.state.email;
 
     return SafeArea(
       child: Padding(
@@ -48,24 +49,11 @@ class _View extends StatelessWidget {
                 ),
                 // Email
                 TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Correo electronico',
+                    errorText: email.errorMessage,
                   ),
-                  onChanged: (value) => registerCubit.usernameChanged(value),
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().isEmpty) {
-                      return 'Campo requerido';
-                    }
-                    final emailRegex = RegExp(
-                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                    );
-                    if (!emailRegex.hasMatch(value)) {
-                      return 'No tiene formato de correo';
-                    }
-                    return null;
-                  },
+                  onChanged: registerCubit.usernameChanged,
                 ),
                 // Password
                 TextFormField(

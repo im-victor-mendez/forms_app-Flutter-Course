@@ -22,7 +22,7 @@ class Password extends FormzInput<String, PasswordError> {
   }
 
   String? get errorMessage {
-    if (displayError == PasswordError.empty) return 'Contraseña no valida';
+    if (displayError == PasswordError.empty) return 'El campo es requerido';
     if (displayError == PasswordError.length) return 'Minimo 6 caracteres';
 
     return null;
