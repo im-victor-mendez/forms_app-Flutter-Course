@@ -8,6 +8,11 @@ By doing this application I learned to use, structure and model the BloC and Cub
 
 It contains 3 main screens, two in which the two types of state handler are used and one in which Cubit and [Formz](https://pub.dev/packages/formz) are used together to create a complex form that is friendly with the UI/UX that is proposed for an application.
 
+## Usage
+You can use this in [Netlify](https://tangerine-rolypoly-02d8da.netlify.app/).
+
+## Overview
+
 | Counter with BloC                                          | Counter with Cubit                                                      | Form with Cubit                                                   |
 | ---------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | ![Counter with BloC](./overview/Counter%20with%20BloC.gif) | ![Counter with Cubit](<./overview/Counter%20with%20Cubit%20(BloC).gif>) | ![Form with Cubit](<./overview/Form%20with%20Cubit%20(BloC).gif>) |
