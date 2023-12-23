@@ -53,7 +53,7 @@ class _View extends StatelessWidget {
                     labelText: 'Correo electronico',
                     errorText: email.errorMessage,
                   ),
-                  onChanged: registerCubit.usernameChanged,
+                  onChanged: registerCubit.emailChanged,
                 ),
                 // Password
                 TextFormField(
